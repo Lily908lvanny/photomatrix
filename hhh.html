@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PHO-MATRICULE</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url("mol.jpg") no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .box {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 330px;
+        justify-content: center;
+        text-align: center;
+        background-color: rgb(67, 65, 170);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      .box h2 {
+        color: rgb(81, 107, 255);
+        padding: 15px;
+      }
+      textarea {
+        width: 90%;
+        height: 12px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        resize: none;
+        margin-bottom: 15px;
+        justify-content: center;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #5865f2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #4752c4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>PHO-MATRI</h2>
+
+      <textarea
+        id="message"
+        placeholder="Écris ton matricule ici..."
+      ></textarea>
+
+      <button onclick="sendMessage()">VOIR PHOTO</button>
+
+      <p id="status"></p>
+    </div>
+
+    <script>
+      const WEBHOOK_URL =
+        "https://discord.com/api/webhooks/1375850659475357764/t6bGQnwd60BEYiNp2YCPQrxOSjQbsw_f4Mf3r5JSX43vyZWMhOdehlKzQ6M2keJcYUqo";
+
+      function sendMessage() {
+        const message = document.getElementById("message").value.trim();
+        const status = document.getElementById("status");
+
+        if (!message) {
+          status.innerHTML = "⚠️ Le message est vide.";
+          status.style.color = "red";
+          return;
+        }
+
+        fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: message,
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              status.innerHTML = "✔️ Message envoyé avec succès !";
+              status.style.color = "green";
+              document.getElementById("message").value = "";
+            } else {
+              status.innerHTML = "❌ Erreur lors de l’envoi.";
+              status.style.color = "red";
+            }
+          })
+          .catch(() => {
+            status.innerHTML = "❌ Impossible de contacter le webhook.";
+            status.style.color = "red";
+          });
+      }
+    </script>
+  </body>
+</html>
