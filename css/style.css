@@ -1,0 +1,150 @@
+/* --- Reset & base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1d2671, #c33763);
+    color: #fff;
+}
+
+/* --- Header --- */
+.app-header {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(0,0,0,0.2);
+}
+
+.app-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #ccc;
+}
+
+/* --- Main content --- */
+.app-main {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+.card {
+    background: rgba(0,0,0,0.3);
+    padding: 30px;
+    border-radius: 12px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.card p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* --- Box page matricule --- */
+.box {
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 330px;
+    text-align: center;
+    background-color: rgb(67,65,170);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.box h2 {
+    color: rgb(81,107,255);
+    padding: 15px;
+}
+
+input, textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+textarea {
+    height: 12px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #5865f2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #4752c4;
+}
+
+.back-btn {
+    margin-top: 15px;
+    background: #333;
+}
+
+.back-btn:hover {
+    background: #111;
+}
+
+#status {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#info {
+    margin-top: 15px;
+    color: white;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* --- Footer --- */
+.app-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    background: rgba(0,0,0,0.2);
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .app-main {
+        flex-direction: column;
+        align-items: center;
+    }
+}
