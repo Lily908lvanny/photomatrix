@@ -1,6 +1,6 @@
 // Page Home
 function showAbout() {
-    alert("PHO-MATRICULE est une application web permettant de gérer et visualiser les matricules des utilisateurs. Développée en 2025.");
+    alert("PHO-MATRICULE est une application web permettant de gérer et visualiser les matricules des utilisateurs. Développée en 2025 par | Tidiane .G |.");
 }
 
 // Page Matricule
