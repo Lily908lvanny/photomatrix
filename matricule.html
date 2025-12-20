@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHO-MATRICULE - Matricule</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="box">
+        <h2>PHO-MATRI</h2>
+        <input id="username" placeholder="Nom d'utilisateur..." />
+        <textarea id="message" placeholder="Écris ton matricule ici..."></textarea>
+        <button onclick="sendMessage();ouvrirPage();">VOIR PHOTO</button>
+        <p id="info">Si vous ne voyez pas de photo, alors la vôtre n'est pas encore disponible.</p>
+        <p id="status"></p>
+        <button class="back-btn" onclick="goHome()">⬅ Retour à l'accueil</button>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
