@@ -1,3 +1,11 @@
+html, body {
+    overflow: hidden; /* bloque le scroll vertical et horizontal */
+    height: 100%;     /* s'assure que la hauteur est limitée à l'écran */
+}
+
+
+
+
 body {
     font-family: Arial;
     display: flex;
