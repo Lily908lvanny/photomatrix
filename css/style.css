@@ -10,7 +10,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1d2671, #202b3a);
+    background-image: url('/assets/mol.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;;
+    background-attachment: fixed;
     color: #fff;
 }
 
