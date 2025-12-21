@@ -151,14 +151,17 @@ button:hover {
 }
 
 @font-face {
-  font-family: 'Monocraft';
-  src: url('./assets/fonts/Monocraft.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+    font-family: "Monocraft";
+    src: url("https://db.onlinewebfonts.com/t/a18ecb4456d9f8b848dedbe113b08cc0.eot");
+    src: url("https://db.onlinewebfonts.com/t/a18ecb4456d9f8b848dedbe113b08cc0.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/a18ecb4456d9f8b848dedbe113b08cc0.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/a18ecb4456d9f8b848dedbe113b08cc0.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/a18ecb4456d9f8b848dedbe113b08cc0.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/a18ecb4456d9f8b848dedbe113b08cc0.svg#Monocraft")format("svg");
 }
 
-.titre {
+
+body h1 {
   font-family: 'Monocraft', monospace;
   text-align: center;
   color: white;
