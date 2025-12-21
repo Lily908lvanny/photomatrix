@@ -13,7 +13,7 @@ body {
     background-image: url('/assets/mol.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;;
+    background-position: center;
     background-attachment: fixed;
     color: #fff;
 }
