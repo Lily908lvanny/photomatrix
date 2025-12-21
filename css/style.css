@@ -84,7 +84,7 @@ body {
 }
 
 input, textarea {
-    width: 90%;
+    width: 100%;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -92,7 +92,11 @@ input, textarea {
 }
 
 textarea {
+<<<<<<< HEAD
     height: 40px;
+=======
+    height: 38px;
+>>>>>>> e68ce79230785860beca7e8d4122ba51f980269a
     resize: none;
 }
 
