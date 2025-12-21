@@ -150,8 +150,15 @@ button:hover {
     }
 }
 
+@font-face {
+  font-family: 'Monocraft';
+  src: url('assets/fonts/Monocraft.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .titre {
-    font-family: Monocraft;
+    font-family: 'Monocraft';
     text-align: center;
     color: white;
     margin-top: 20px;
